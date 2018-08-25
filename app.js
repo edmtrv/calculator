@@ -28,6 +28,21 @@ function operate(operator, a, b) {
   }
 }
 
+// const data = {
+//   numbers: [[4], [1], [2]],
+//   operators: ['+', '-']
+// };
+
+function calculate() {
+  const result = data.numbers
+    .map(el => parseFloat(el.join('')))
+    .reduce((accu, current, i) => {
+      return operate(data.operators[i - 1], accu, current);
+  });
+
+  return result;
+}
+
 // Data
 
 const data = {
@@ -42,12 +57,17 @@ function addNumber(input) {
     data.numbers.push([input]) // start a new number
   }
 
-  console.log(data);
+  console.log(data.numbers);
 }
 
 function addOperator(input) {
   data.operators.push(input);
-  console.log(data);
+  console.log(data.operators);
+}
+
+function clearData() {
+  data.numbers = [];
+  data.operators = [];
 }
 
 
@@ -63,17 +83,29 @@ function addToDisplay(...inputs) {
   }
 }
 
+function clearDisplay() {
+  display.textContent = '';
+}
+
 // Controller
 function handleClick(e) {
   if (e.target.dataset.number) {
     addToDisplay(e.target.dataset.number);
     addNumber(e.target.dataset.number);
-  } else {
+  } else if (e.target.dataset.operator) {
     // can't add an operator if the previous input is one
     if (data.operators.length === data.numbers.length) return;
 
     addToDisplay(e.target.dataset.operator, e.target.textContent);
     addOperator(e.target.dataset.operator);
+  } else if (e.target.dataset.equals) {
+    // can't calculate expression if the previous input is an operator
+    if (data.operators.length === data.numbers.length) return;
+    const result = calculate();
+    clearData();
+    clearDisplay();
+    addNumber(result);
+    addToDisplay(result);
   }
 }
 
