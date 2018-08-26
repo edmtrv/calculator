@@ -90,6 +90,9 @@ function clearDisplay() {
 // Controller
 function handleClick(e) {
   if (e.target.dataset.number) {
+    if (!data.numbers[0]) {
+      clearDisplay();
+    }
     addToDisplay(e.target.dataset.number);
     addNumber(e.target.dataset.number);
   } else if (e.target.dataset.operator) {
@@ -104,8 +107,14 @@ function handleClick(e) {
     const result = calculate();
     clearData();
     clearDisplay();
-    addNumber(result);
-    addToDisplay(+result.toFixed(10));
+
+    if (result === Infinity) {
+      addToDisplay('Can\'t divide by 0');
+    } else {
+      addNumber(result);
+      addToDisplay(+result.toFixed(10));
+    }
+
   } else if (e.target.dataset.operation === 'clear') {
     clearData();
     clearDisplay();
