@@ -105,7 +105,20 @@ function handleClick(e) {
     clearData();
     clearDisplay();
     addNumber(result);
-    addToDisplay(result);
+    addToDisplay(+result.toFixed(10));
+  } else if (e.target.dataset.operation === 'clear') {
+    clearData();
+    clearDisplay();
+  } else if (e.target.dataset.point) {
+    // add leading zero if decimal point is the first thing in a number
+    if (data.numbers.length === data.operators.length || data.numbers[data.numbers.length - 1].length === 0) {
+      addToDisplay('0');
+      addNumber('0');
+    }
+
+    if (data.numbers[data.numbers.length - 1].includes('.')) return // allow only 1 decimal point
+    addToDisplay(e.target.dataset.point);
+    addNumber(e.target.dataset.point);
   }
 }
 
