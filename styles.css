@@ -20,6 +20,8 @@ body {
 }
 
 .calculator {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -31,7 +33,7 @@ body {
 }
 
 .display {
-  height: 30%;
+  height: 150px;
   background: linear-gradient(to bottom, rgb(30, 22, 80), rgb(15, 4, 56));
   font-size: 3em;
   text-align: right;
@@ -42,10 +44,15 @@ body {
 }
 
 .buttons {
-  height: 70%;
+  height: 350px;
   background: linear-gradient(to bottom, rgb(211, 54, 54), rgb(204, 12, 12));
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.row {
+  display: flex;
+  height: 70px;
 }
 
 button {
@@ -64,8 +71,6 @@ button[data-operator] {
 
 .btn {
   width: 25%;
-  height: 20%;
-  float: left;
   border: 0.5px solid rgba(226, 226, 226, 0.09);
   transition: all .3s;
 }
@@ -80,7 +85,6 @@ button[data-operator] {
 
 .btn-big {
   width: 100%;
-  height: 20%;
   background: linear-gradient(to bottom, rgb(250, 181, 53), rgb(255, 197, 8));
   color: rgb(30, 22, 80);
   font-size: 4em;
