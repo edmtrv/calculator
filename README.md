@@ -1,3 +1,3 @@
-A simple calculator 
+A simple calculator
 
-[View in Browser](https://imemdm.github.io/calculator)
+[View in Browser](https://edmtrv.github.io/calculator)
